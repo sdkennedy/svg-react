@@ -122,18 +122,22 @@ var elementToString = function( depth, el ){
     if( Object.keys(el.attributes).length === 0 && el.children.length === 0 ){
         return output + "()\n";
     } else {
-        output += "\n";
+        output += "(\n";
     }
 
     // Output attributes
-    output = _.reduce(
-        el.attributes,
-        function(acc, val, key){
-            acc += wsp(depth+1) + key + ': "' + val + "\"\n";
-            return acc;
-        },
-        output
-    );
+    if( Object.keys(el.attributes).length === 0 ){
+        output += "{}\n";
+    } else {
+        output = _.reduce(
+            el.attributes,
+            function(acc, val, key){
+                acc += wsp(depth+1) + key + ': "' + val + "\"\n";
+                return acc;
+            },
+            output
+        );
+    }
     // Output children
     output = _.reduce(
         el.children,
@@ -143,6 +147,8 @@ var elementToString = function( depth, el ){
         },
         output
     );
+
+    output += wsp(depth) + ")\n";
 
     return output;
 };
