@@ -11,7 +11,7 @@ D = React.DOM
 
     render: ->
         @transferPropsTo (
-            <%= svgString %>
+<%= svgString %>
         )
 
 module.exports = <%= componentName %>

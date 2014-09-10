@@ -56,14 +56,14 @@ var findFiles = (function(){
 })();
 
 //SVG Parsing
-var svgToComponent = function( path ){
+var svgToComponent = function( dst, src ){
     var name, componentPath;
 
-    name = basename(path);
+    name = basename(src);
     name = name.substr(0, name.length-4 );
-    componentPath = "./"+name+"-icon.coffee";
+    componentPath = dst+"/"+name+"-icon.coffee";
 
-    return FS.read(path).
+    return FS.read(src).
         then( parseXmlString ).
         then( parseRoot ).
         //Element is placed into template 3 tabs deep
@@ -116,7 +116,6 @@ var parseChildren = function( node ){
 };
 
 //Rendering Functions
-
 var elementToString = function( depth, el ){
     var output = wsp(depth) + el.name;
 
@@ -169,10 +168,12 @@ var renderTemplate = function( name, svgString ){
         });
 };
 
-findFiles( process.argv[2] ).
+var src = process.argv[2];
+var dst = process.argv[3];
+findFiles( src ).
     // Process SVGs and save as components
     then(function( files ){
-        var promises = files.map( svgToComponent );
+        var promises = files.map( svgToComponent.bind(null, dst) );
         return Q.all( promises );
     }).
     fail( console.log );
