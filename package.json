@@ -1,0 +1,18 @@
+{
+  "name": "svg-react",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "change-case": "^2.1.5",
+    "q": "^1.0.1",
+    "q-io": "^1.11.4",
+    "underscore": "^1.7.0",
+    "xml2js": "^0.4.4"
+  }
+}
