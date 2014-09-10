@@ -127,7 +127,7 @@ var elementToString = function( depth, el ){
 
     // Output attributes
     if( Object.keys(el.attributes).length === 0 ){
-        output += "{}\n";
+        output += wsp(depth+1) + "{},\n";
     } else {
         output = _.reduce(
             el.attributes,
@@ -161,7 +161,7 @@ var wsp = function( depth ){
     return output;
 };
 var renderTemplate = function( name, svgString ){
-    var componentName = changeCase.title(name) + "Icon";
+    var componentName = changeCase.pascalCase(name) + "Icon";
     return FS.read( "./component.tpl" ).
         then(function( templateStr ){
             try{
